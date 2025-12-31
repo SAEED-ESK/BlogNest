@@ -1,8 +1,10 @@
 from django.urls import path
-from django.views.generic import TemplateView
 from . import views
 
+app_name = 'blog'
+
 urlpatterns = [
-    path('index-fbv', views.index_fbv, name='index-fbv'),
-    path('index-cbv', views.IndexView.as_view(),name='index-cbv'),
+    path('post/', views.BlogListView.as_view(),name='blog-list'),
+    path('post/<int:pk>/', views.BlogDetailView.as_view(), name='blog-detail'),
+    path('post/create/', views.BlogCreateView.as_view(), name='blog-create'),
 ]

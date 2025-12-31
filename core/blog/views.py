@@ -1,14 +1,18 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import ListView, DetailView, CreateView
+from .models import Post
+from .forms import PostForm
 
-# Create your views here.
-def index_fbv(request):
-    return render(request, 'index.html')
+class BlogListView(ListView):
+    model = Post
+    paginate_by = 2
+    ordering = '-created_date'
 
-class IndexView(TemplateView):
-    template_name = 'index.html'
+class BlogDetailView(DetailView):
+    model = Post
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['name'] = 'Ali'
-        return context
+class BlogCreateView(CreateView):
+    model = Post
+    template_name = 'blog/post_create.html'
+    form_class = PostForm
+    success_url = '/blog/post/'
