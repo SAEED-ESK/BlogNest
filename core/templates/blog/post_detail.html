@@ -13,5 +13,11 @@
     <p>{{object.status}}</p>
     <p>{{object.published_date}}</p>
     <p>{{object.created_date}}</p>
+    <a href="{% url 'blog:blog-edit' pk=post.id %}">
+        <h5>Edit</h5>
+    </a>
+    <a href="{% url 'blog:blog-delete' pk=post.id %}">
+        <h5>Delete</h5>
+    </a>
 </body>
 </html>

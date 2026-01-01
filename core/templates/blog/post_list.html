@@ -10,7 +10,7 @@
         <div>
             <h2><a href="{% url 'blog:blog-detail' pk=post.id %}">{{post}}</a></h2>
             <p>{{post.content}}</p>
-            <p>{{post.category}}</p>
+            <p>{{post.author}}</p>
             <p>{{post.published_date}}</p>
         </div>
     {% endfor %}
