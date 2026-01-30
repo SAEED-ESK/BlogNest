@@ -19,5 +19,25 @@
     <a href="{% url 'blog:blog-delete' pk=post.id %}">
         <h5>Delete</h5>
     </a>
+    <h3>Comments</h3>
+    {% for comment in object.comments.all %}
+    <div>
+        <b>{{comment.author.profile.display_name}}</b>
+        <small>{{comment.created_date}}</small>
+        <p>{{comment.body}}</p>
+        {% if request.user == comment.author or request.user.is_superuser %}
+            <div>
+            <a href="{% url 'comment:delete' comment.id %}">Delete</a>
+            </div>
+        {% endif %}
+        <b>-------------------------------</b>
+    </div>
+    {% endfor %}
+    <h3>Leave a comment</h3>
+    <form action="{% url 'comment:create' post.id %}" method="post">
+        {% csrf_token %}
+        {{comment_form.as_p}}
+        <button type="submit">Send</button>
+    </form>
 </body>
 </html>
