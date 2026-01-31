@@ -5,7 +5,8 @@ from ...models import Post
 #     id = serializers.IntegerField()
 #     title = serializers.CharField(max_length=255)
 
+
 class PostSerializers(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['id', 'title', 'content', 'status', 'author', 'published_date']
+        fields = ["id", "title", "content", "status", "author", "published_date"]

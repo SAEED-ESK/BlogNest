@@ -1,6 +1,26 @@
+# general modules
 django==4.2.9
 python-decouple==3.8
 pillow
+
+# third party modules
 djangorestframework==3.14.0
-markdown==3.14.0
+markdown==3.4.1
 django-filter==23.5
+djangorestframework-simplejwt==5.3.1
+drf-yasg[validation]==1.21.10
+django-cors-headers
+
+# email third party modules
+django-mail-templated==2.6.5
+
+# reformating and test
+black==24.8.0
+flake8==7.1.2
+pytest==8.3.5
+pytest-django==4.11.1
+faker==35.2.2
+
+# background proccess and cache
+celery==5.5.3
+redis==6.1.1
