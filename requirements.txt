@@ -9,7 +9,7 @@ markdown==3.4.1
 django-filter==23.5
 djangorestframework-simplejwt==5.3.1
 drf-yasg[validation]==1.21.10
-django-cors-headers
+django-cors-headers==4.4.0
 
 # email third party modules
 django-mail-templated==2.6.5
