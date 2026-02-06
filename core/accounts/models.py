@@ -8,9 +8,6 @@ from django.contrib.auth.models import (
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-# Create your models here.
-
-
 class UserManager(BaseUserManager):
     """
     Custom user model manager where email is the unique identifiers
@@ -45,7 +42,6 @@ class UserManager(BaseUserManager):
 
         return self.create_user(email, password, **extrafields)
 
-
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     is_superuser = models.BooleanField(default=False)
@@ -62,7 +58,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
-
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
@@ -81,8 +76,10 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.email
 
-
 @receiver(post_save, sender=User)
 def save_profile(sender, instance, created, **kwargs):
+    """
+    Create a profile for user after user be created
+    """
     if created:
         Profile.objects.create(user=instance)

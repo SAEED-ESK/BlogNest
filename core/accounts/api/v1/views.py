@@ -24,11 +24,17 @@ from .serializers import (
     ResetPasswordSerializer,
 )
 from .utils import EmailThread
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 import jwt
 
 
 class RegistrationApiView(generics.GenericAPIView):
+    """
+    Post user with email and password
+    Check validations
+    Create user
+    Send an email for user with jwt token
+
+    """
     serializer_class = RegistrationSerializers
 
     def post(self, request, *args, **kwargs):
@@ -45,11 +51,18 @@ class RegistrationApiView(generics.GenericAPIView):
         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
     
     def get_token_for_user(self, user):
+        """
+        create a jwt token for user
+        """
         refresh = RefreshToken.for_user(user)
         return(str(refresh.access_token))
 
 
 class CustomObtainAuthToken(ObtainAuthToken):
+    """
+    Create token with user credentials
+    Response contain token, user id and email of user
+    """
     serializer_class = CustomAuthTokenSerializer
 
     def post(self, request, *args, **kwargs):
@@ -63,6 +76,9 @@ class CustomObtainAuthToken(ObtainAuthToken):
 
 
 class CustomDiscardAuthToken(APIView):
+    """
+    Destroying auth token
+    """
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -71,15 +87,26 @@ class CustomDiscardAuthToken(APIView):
 
 
 class ChangePasswordAPIView(generics.GenericAPIView):
+    """
+    API endpoint for authenticated users to change their own password.
+    Expects old_password and new_password in request data.
+    """
     serializer_class = ChangePasswordSerializer
     model = User
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
+        """
+        Return the currently authenticated user.
+        This view does not support changing passwords for other users.
+        """
         obj = self.request.user
         return obj
 
     def put(self, request, *args, **kwargs):
+        """
+        Validates old password and updates user's password if valid.
+        """
         self.object = self.get_object()
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
@@ -98,20 +125,34 @@ class ChangePasswordAPIView(generics.GenericAPIView):
 
 
 class ProfileAPIView(generics.RetrieveUpdateAPIView):
+    """
+    API endpoint for Authenticated users to get own profile.
+    """
     serializer_class = ProfileSerializer
     queryset = Profile.objects.all()
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
+        """
+        Get currently user object
+        If user not exist return 404
+        """
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset, user=self.request.user)
         return obj
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
+    """
+    Create jwt token for sender user
+    Expects email and password in request data.
+    """
     serializer_class = CustomTokenObtainPairSerializer
 
 class EmailTesting(generics.GenericAPIView):
+    """
+    Just for testing email operation
+    """
     def get(self, request, *args, **kwargs):
         user_obj = get_object_or_404(User, email='user@gmail.com')
         token = self.get_token_for_user(user_obj)
@@ -124,7 +165,16 @@ class EmailTesting(generics.GenericAPIView):
         return(str(refresh.access_token))
     
 class ActivationAPIView(APIView):
+    """
+    API endpoint for users who received verification email to going to verify own account.
+
+    """
     def get(self, request, token, *args, **kwargs):
+        """
+        A GET request for decode jwt token.
+        Checking Token validations.
+        Turn is_verified fields of user's account to True and save if pass
+        """
         try:
             token = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
             user_id = token.get('user_id')
@@ -144,6 +194,10 @@ class ActivationAPIView(APIView):
         return Response({'details': 'Users email is verfied!'}, status=status.HTTP_200_OK)
     
 class ActivationResendAPIView(generics.GenericAPIView):
+    """
+    API Endpoint for resend activation email for users
+    Sending email with jwt token
+    """
     serializer_class = ActivationResendSerializer
 
     def post(self, request, *args, **kwargs):
@@ -156,10 +210,18 @@ class ActivationResendAPIView(generics.GenericAPIView):
         return Response({'details': 'User activation resend successfuly!'}, status=status.HTTP_200_OK)
     
     def get_token_for_user(self, user):
+        """
+        Build and return access token for current user
+        """
         refresh = RefreshToken.for_user(user)
         return(str(refresh.access_token))
     
 class EmailResetPasswordView(generics.GenericAPIView):
+    """
+    First Step for reset user password by sending email to
+    user's email.
+    The url for get new password build with jwttoken.
+    """
     serializer_class = EmailResetPasswordSerializer
 
     def post(self, request, *args, **kwargs):
@@ -176,6 +238,10 @@ class EmailResetPasswordView(generics.GenericAPIView):
         return(str(refresh.access_token))
     
 class ResetPasswordView(generics.GenericAPIView):
+    """
+    Second step for reseting user's password.
+    Expects new_password and new_password1 in request data.
+    """
     serializer_class = ResetPasswordSerializer
 
     def put(self, request, token, *args, **kwargs):
