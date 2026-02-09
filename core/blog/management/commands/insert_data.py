@@ -15,6 +15,10 @@ category_list = [
 ]
 
 class Command(BaseCommand):
+    """
+    A command for inserting 10 posts with random data
+    and fake user and profile.
+    """
     help = 'inserting dummy data'
 
     def __init__(self, *args, **kwargs):

@@ -5,8 +5,13 @@ from .permissions import IsOwnerOrReadonly
 from .serializers import PostSerializers, CategorySerializers
 from ...models import Post, Category
 
+"""
+API v2 implementaion for managing blog posts.
+Provides full CRUD functionality using DRF ModelViewSets.
+"""
 
 class PostModelViewSet(ModelViewSet):
+    # Read access in public; write access is limited to the post owner
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadonly]
     serializer_class = PostSerializers
     queryset = Post.objects.all()
