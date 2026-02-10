@@ -1,6 +1,7 @@
 from rest_framework.test import APIClient
 from django.urls import reverse
 from datetime import datetime
+
 from accounts.models import User
 import pytest
 
@@ -18,7 +19,7 @@ def commen_user():
     return user
 
 @pytest.mark.django_db
-class TestPostAPI:
+class TestPostListAPI:
     client = APIClient()
 
     def test_get_post_response_status_200(self, api_client):
@@ -26,7 +27,7 @@ class TestPostAPI:
         response = api_client.get(url)
         assert response.status_code == 200
 
-    def test_post_create_response_status_401(self, api_client):
+    def test_post_create_unauthorized(self, api_client):
         url = reverse('blog:api-v2:post-list')
         data = {
             'title': 'test',
@@ -37,7 +38,7 @@ class TestPostAPI:
         response = api_client.post(url, data)
         assert response.status_code == 401
 
-    def test_post_create_response_status_201(self, api_client, commen_user):
+    def test_post_create_authorized(self, api_client, commen_user):
         url = reverse('blog:api-v2:post-list')
         data = {
             'title': 'test',
@@ -49,7 +50,7 @@ class TestPostAPI:
         response = api_client.post(url, data)
         assert response.status_code == 201
 
-    def test_post_create_invalid_data_response_status_400(self, api_client, commen_user):
+    def test_post_create_with_invalid_data(self, api_client, commen_user):
         url = reverse('blog:api-v2:post-list')
         data = {
             'title': 'test',
