@@ -26,3 +26,7 @@ requests==2.32.4
 celery==5.5.3
 redis==6.1.1
 django-redis==5.4.0
+
+# development module
+gunicorn==23.0.0
+psycopg2-binary
