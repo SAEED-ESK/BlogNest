@@ -12,6 +12,11 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      POSTGRES_DB: core_db
+      POSTGRES_USER: core_user
+      POSTGRES_PASSWORD: core_pass
+
     steps:
     - uses: actions/checkout@v4
     - name: Setup Docker Compose
