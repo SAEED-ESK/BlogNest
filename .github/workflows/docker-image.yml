@@ -20,8 +20,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup Docker Compose
-      run: docker compose up -d --build
-    - name: Wait for DB
-      run: docker compose run --rm backend pytest
+      run: docker compose up -f docker-compose-stage.yml -d --build
     - name: Run Tests
       run: docker compose exec backend sh -c "pytest ."
