@@ -90,15 +90,15 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("POSTGRES_DB"),
-        "USER": os.environ.get("POSTGRES_USER"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "ENGINE": config("PGDB_ENGINE", default="django.db.backends.postgresql"),
+        "NAME": config("PGDB_NAME", default="core_db"),
+        "USER": config("PGDB_USER", default="core_user"),
+        "PASSWORD": config("PGDB_PASS", default="core_pass"),
         'TEST': {
             'NAME': 'mytestdatabase',
         },
-        "HOST": "db",
-        "PORT": "5432",
+        "HOST": config("PGDB_HOST", default="db"),
+        "PORT": config("PGDB_PORT", cast=int, default=5432),
     }
 }
 
