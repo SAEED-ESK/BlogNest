@@ -1,4 +1,4 @@
-name: Django BlogNest Project
+name: Django BlogNest Project Test and Deploy
 
 on:
   push:
@@ -8,7 +8,8 @@ on:
 
 jobs:
 
-  build:
+  Test:
+    name: Test
 
     runs-on: ubuntu-latest
 
@@ -23,3 +24,26 @@ jobs:
       run: docker compose -f docker-compose-stage.yml up -d --build
     - name: Run Tests
       run: docker compose exec backend sh -c "pytest ."
+
+  Deploy:
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    name: Deploy
+    needs: Test
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Connect and excute commands
+      uses: appleboy/ssh-action@master
+      with:
+        username: ${{secrets.USERNAME}}
+        password: ${{secrets.PASSWORD}}
+        host: ${{secrets.HOST}}
+        port: ${{secrets.PORT}}
+        script: |
+          cd ${{secrets.PROJECT_PATH}}
+          docker compose -f docker-compose-stage.yml stop
+          git pull
+          docker compose -f docker-compose-stage.yml restart
+          docker compose exec backend python manage.py collectstatic --noinput
