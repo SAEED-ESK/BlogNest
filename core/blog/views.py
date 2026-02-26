@@ -6,10 +6,12 @@ from django.views.generic import (
     DeleteView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
 
 from comment.forms import CommentForm
 from .models import Post
 from .forms import PostForm
+from accounts.models import Profile
 
 
 class BlogListView(ListView):
@@ -52,7 +54,7 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
         """
         Add user instance of post automatically from request data.
         """
-        form.instance.author = self.request.user
+        form.instance.author = Profile.objects.get(user=self.request.user)
         return super().form_valid(form)
 
 
@@ -64,8 +66,13 @@ class BlogEditView(LoginRequiredMixin, UpdateView):
     model = Post
     template_name = "blog/post_create.html"
     form_class = PostForm
-    success_url = "/blog/post/"
 
+    def get_queryset(self):
+        author = Profile.objects.get(user=self.request.user)
+        return super().get_queryset().filter(author=author)
+    
+    def get_success_url(self):
+        return reverse("blog:blog-detail", kwargs={"pk": self.object.id})
 
 class BlogDeleteView(LoginRequiredMixin, DeleteView):
     """
@@ -75,3 +82,7 @@ class BlogDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = "blog/post_delete.html"
     success_url = "/blog/post/"
+
+    def get_queryset(self):
+        author = Profile.objects.get(user=self.request.user)
+        return super().get_queryset().filter(author=author)
