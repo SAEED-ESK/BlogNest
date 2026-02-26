@@ -89,16 +89,9 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": config("PGDB_ENGINE", default="django.db.backends.postgresql"),
-        "NAME": config("PGDB_NAME", default="core_db"),
-        "USER": config("PGDB_USER", default="core_user"),
-        "PASSWORD": config("PGDB_PASS", default="core_pass"),
-        'TEST': {
-            'NAME': 'mytestdatabase',
-        },
-        "HOST": config("PGDB_HOST", default="db"),
-        "PORT": config("PGDB_PORT", cast=int, default=5432),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
