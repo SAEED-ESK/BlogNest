@@ -7,9 +7,10 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 
 from comment.forms import CommentForm
-from .models import Post
+from .models import Post, Category
 from .forms import PostForm
 from accounts.models import Profile
 
@@ -19,9 +20,24 @@ class BlogListView(ListView):
     Displays the list of blog posts with True status
     """
     model = Post
-    queryset = Post.objects.filter(status=True)
     paginate_by = 2
     ordering = "-created_date"
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(status=True)
+        category_name = self.request.GET.get('category')
+        if category_name:
+            self.category = get_object_or_404(Category, name=category_name)
+            queryset = queryset.filter(category=self.category)
+        else:
+            self.category = None
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['current_category'] = self.category
+        return context
 
 
 class BlogDetailView(LoginRequiredMixin, DetailView):
