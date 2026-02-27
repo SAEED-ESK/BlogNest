@@ -1,5 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
+
 from .paginations import DefaultPagination
 from .permissions import IsOwnerOrReadonly
 from .serializers import PostSerializers, CategorySerializers
@@ -16,6 +18,8 @@ class PostModelViewSet(ModelViewSet):
     serializer_class = PostSerializers
     queryset = Post.objects.all()
     pagination_class = DefaultPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['category']
 
 
 class CategoryModelViewSet(ModelViewSet):
