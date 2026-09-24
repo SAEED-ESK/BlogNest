@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.http import HttpResponse
+from django.shortcuts import render
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -38,10 +38,10 @@ schema_view = get_schema_view(
 )
 
 def index_page(request):
-    return HttpResponse('<h2>BlogNest</h2>')
+    return render(request, 'index.html')
 
 urlpatterns = [
-    path("", index_page, name='index'),
+    path("", index_page, name='home'),
     path("admin/", admin.site.urls),
     path("blog/", include("blog.urls")),
     path("comment/", include("comment.urls")),

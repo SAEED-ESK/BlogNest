@@ -1,12 +1,134 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Index Page</h1>
-    <h2>{{name}}</h2>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+BlogNest
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-overlay">
+
+        <span class="badge">
+            👋 خوش آمدید به BlogNest
+        </span>
+
+        <h1>
+            جایی برای خواندن،
+            <br>
+            نوشتن و الهام گرفتن
+        </h1>
+
+        <p>
+
+            در BlogNest باور داریم هر ایده‌ای ارزش شنیده شدن دارد.
+            مقاله بخوانید، دانش خود را گسترش دهید و
+            با نویسندگان و خوانندگان دیگر همراه شوید.
+
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{% url 'blog:blog-list' %}" class="btn btn-primary">
+                مشاهده پست‌ها
+            </a>
+
+            <a href="#" class="btn btn-outline">
+                ثبت‌نام
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="features">
+
+    <div class="container">
+
+        <h2>
+            چرا BlogNest؟
+        </h2>
+
+        <p class="section-text">
+
+            بستری ساده، سریع و کاربردی برای مطالعه و انتشار محتوا.
+
+        </p>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+
+                <i class="fa-solid fa-pen"></i>
+
+                <h3>
+                    نوشتن آسان
+                </h3>
+
+                <p>
+
+                    مقالات خود را با محیطی ساده و زیبا منتشر کنید.
+
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <i class="fa-solid fa-book-open"></i>
+
+                <h3>
+                    مطالعه متنوع
+                </h3>
+
+                <p>
+
+                    به مطالب متنوع در موضوعات مختلف دسترسی داشته باشید.
+
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <i class="fa-solid fa-users"></i>
+
+                <h3>
+                    جامعه پویا
+                </h3>
+
+                <p>
+
+                    از نوشته‌های دیگران یاد بگیرید و تجربه کسب کنید.
+
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <h3>
+                    محیط امن
+                </h3>
+
+                <p>
+
+                    بستری مطمئن برای تولید و مطالعه محتوا.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
