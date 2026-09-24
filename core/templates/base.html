@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}BlogNest{% endblock %}</title>
+
+    <!-- فونت وزیر -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- ================= Header ================= -->
+
+    <header>
+
+        <div class="container navbar">
+
+            <a href="{% url 'home' %}" class="logo">
+                Blog<span>Nest</span>
+            </a>
+
+            <nav>
+
+                <ul>
+
+                    <li>
+                        <a href="{% url 'home' %}" class="active">
+                            خانه
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            درباره ما
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'blog:blog-list' %}">
+                            پست‌ها
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+            <div class="nav-buttons">
+
+                <a href="{% url 'accounts:login' %}" class="btn btn-outline">
+                    ورود
+                </a>
+
+                <a href="#" class="btn btn-primary">
+                    ثبت نام
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- ================= Main ================= -->
+
+    <main>
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+    <!-- ================= Footer ================= -->
+
+    <footer>
+
+        <div class="container footer-grid">
+
+            <div>
+
+                <h2 class="footer-logo">
+                    BlogNest
+                </h2>
+
+                <p>
+                    BlogNest بستری برای اشتراک‌گذاری دانش،
+                    تجربه و ایده‌های ارزشمند است.
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>
+                    دسترسی سریع
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="{% url 'home' %}">
+                            خانه
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'blog:blog-list' %}">
+                            همه پست‌ها
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            درباره ما
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div>
+
+                <h3>
+                    اطلاعات
+                </h3>
+
+                <p>
+                    info@blognest.ir
+                </p>
+
+                <p>
+                    +98 912 123 4567
+                </p>
+
+                <p>
+                    ایران
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="copyright">
+
+            © 2026 BlogNest | تمامی حقوق محفوظ است.
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
