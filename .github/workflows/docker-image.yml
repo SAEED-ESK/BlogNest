@@ -5,6 +5,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
 
@@ -26,7 +27,7 @@ jobs:
       run: docker compose exec backend sh -c "pytest ."
 
   Deploy:
-    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     name: Deploy
     needs: Test
 
