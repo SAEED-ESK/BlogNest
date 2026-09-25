@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+ثبت نام | BlogNest
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/authentication/register/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section register-section">
+
+    <div class="auth-card register-card">
+
+        <div class="auth-header">
+
+            <div class="auth-icon">
+                <i class="fa-solid fa-user-plus"></i>
+            </div>
+
+            <h1>ایجاد حساب کاربری</h1>
+
+            <p>
+                به BlogNest بپیوندید و شروع به نوشتن کنید.
+            </p>
+
+        </div>
+
+
+        <form method="post" class="auth-form">
+
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="form-error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="{{ form.first_name.id_for_label }}">
+                        نام
+                    </label>
+
+                    {{ form.first_name }}
+
+                    {% if form.first_name.errors %}
+                        <div class="field-error">
+                            {{ form.first_name.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.last_name.id_for_label }}">
+                        نام خانوادگی
+                    </label>
+
+                    {{ form.last_name }}
+
+                    {% if form.last_name.errors %}
+                        <div class="field-error">
+                            {{ form.last_name.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="{{ form.email.id_for_label }}">
+                    ایمیل
+                </label>
+
+                {{ form.email }}
+
+                {% if form.email.errors %}
+                    <div class="field-error">
+                        {{ form.email.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="{{ form.password1.id_for_label }}">
+                    رمز عبور
+                </label>
+
+                {{ form.password1 }}
+
+                {% if form.password1.errors %}
+                    <div class="field-error">
+                        {{ form.password1.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="{{ form.password2.id_for_label }}">
+                    تکرار رمز عبور
+                </label>
+
+                {{ form.password2 }}
+
+                {% if form.password2.errors %}
+                    <div class="field-error">
+                        {{ form.password2.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <button type="submit" class="auth-submit">
+                ایجاد حساب
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+
+        </form>
+
+
+        <div class="auth-footer">
+
+            <span>قبلاً حساب کاربری دارید؟</span>
+
+            <a href="{% url 'accounts:login' %}">
+                وارد شوید
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

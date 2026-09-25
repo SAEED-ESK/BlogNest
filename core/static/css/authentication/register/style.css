@@ -1,0 +1,226 @@
+.register-section {
+    padding: 55px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-card {
+    width: min(560px, 100%);
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.register-card .auth-header {
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   Form
+========================= */
+
+.register-card .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+
+/* =========================
+   Form Groups
+========================= */
+
+.register-card .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.register-card .form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #3b3028;
+}
+
+
+/* =========================
+   Inputs
+========================= */
+
+.register-card .form-group input {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+
+    border: 1px solid #ddd4cf;
+    border-radius: 10px;
+
+    background: #fff;
+    color: #222;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    transition: border-color .2s ease,
+                box-shadow .2s ease;
+}
+
+.register-card .form-group input:focus {
+    border-color: #8b4b2d;
+    box-shadow: 0 0 0 3px rgba(139, 75, 45, .10);
+}
+
+.register-card .form-group input::placeholder {
+    color: #aaa;
+}
+
+
+/* =========================
+   Password Help Text
+========================= */
+
+.register-card .form-group .helptext {
+    margin: 0;
+    padding: 0;
+
+    color: #888;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.register-card .form-group .helptext ul {
+    margin: 4px 0 0;
+    padding-right: 18px;
+}
+
+.register-card .form-group .helptext li {
+    margin-bottom: 2px;
+}
+
+
+/* =========================
+   Errors
+========================= */
+
+.register-card .field-error,
+.register-card .form-error {
+    color: #b42318;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.register-card .field-error ul,
+.register-card .form-error ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.register-card .form-error {
+    padding: 11px 14px;
+    border-radius: 9px;
+    background: #fff1f0;
+}
+
+
+/* =========================
+   Submit Button
+========================= */
+
+.register-card .auth-submit {
+    width: 100%;
+    height: 50px;
+
+    margin-top: 5px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #8b4b2d;
+    color: #fff;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background .2s ease,
+                transform .2s ease;
+}
+
+.register-card .auth-submit:hover {
+    background: #6d3b22;
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   Footer
+========================= */
+
+.register-card .auth-footer {
+    margin-top: 25px;
+    padding-top: 22px;
+
+    border-top: 1px solid #eee7e3;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    color: #777;
+    font-size: 13px;
+}
+
+.register-card .auth-footer a {
+    color: #8b4b2d;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-card .auth-footer a:hover {
+    color: #6d3b22;
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 600px) {
+
+    .register-section {
+        padding: 35px 15px;
+    }
+
+    .register-card {
+        padding: 30px 22px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .register-card .auth-header h1 {
+        font-size: 25px;
+    }
+
+    .register-card .auth-form {
+        gap: 17px;
+    }
+}
