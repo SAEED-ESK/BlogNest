@@ -2,9 +2,11 @@ from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.cache import cache_page
+from django.contrib.auth.decorators import login_required
 
 from .tasks import sendEmail
 from .forms import RegisterForm
+from blog.models import Post
 
 import requests
 
@@ -24,6 +26,23 @@ def register(request):
         form = RegisterForm()
 
     return render(request, "registration/register.html", {"form": form})
+
+@login_required
+def profile(request):
+    profile = request.user.profile
+
+    posts = Post.objects.filter(
+        author=profile
+    ).order_by("-created_date")
+
+    return render(
+        request,
+        "registration/profile.html",
+        {
+            "profile": profile,
+            "posts": posts,
+        },
+    )
 
 def send_email(request):
     """

@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+پروفایل | BlogNest
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/authentication/profile/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="profile-section">
+
+    <div class="profile-layout">
+
+        <!-- Profile -->
+        <aside class="profile-card">
+
+            <div class="profile-avatar">
+                {% if profile.image %}
+                    <img src="{{ profile.image.url }}" alt="تصویر پروفایل">
+                {% else %}
+                    <i class="fa-solid fa-user"></i>
+                {% endif %}
+            </div>
+
+            <div class="profile-info">
+
+                <h1>
+                    {{ profile.display_name }}
+                </h1>
+
+                <p class="profile-email">
+                    {{ request.user.email }}
+                </p>
+
+                {% if profile.description %}
+                    <p class="profile-description">
+                        {{ profile.description }}
+                    </p>
+                {% else %}
+                    <p class="profile-description empty-description">
+                        هنوز توضیحی برای پروفایل ثبت نشده است.
+                    </p>
+                {% endif %}
+
+                <a href="#" class="profile-edit-btn">
+                    <i class="fa-solid fa-pen"></i>
+                    ویرایش پروفایل
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- Posts -->
+        <section class="my-posts">
+
+            <div class="section-heading">
+                <h2>نوشته‌های من</h2>
+                <span>{{ posts.count }} نوشته</span>
+            </div>
+
+            {% if posts %}
+
+                <div class="posts-grid">
+
+                    {% for post in posts %}
+
+                        <article class="post-card">
+
+                            {% if post.image %}
+                                <div class="post-image">
+                                    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                                </div>
+                            {% endif %}
+
+                            <div class="post-content">
+
+                                <h3>{{ post.title }}</h3>
+
+                                {% if post.category %}
+                                    <span class="post-category">
+                                        {{ post.category.name }}
+                                    </span>
+                                {% endif %}
+
+                                <p class="post-date">
+                                    {{ post.created_date|date:"Y/m/d" }}
+                                </p>
+
+                            </div>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-posts">
+                    <i class="fa-regular fa-file-lines"></i>
+
+                    <h3>هنوز نوشته‌ای منتشر نکرده‌اید</h3>
+
+                    <p>
+                        اولین نوشته خود را ایجاد کنید.
+                    </p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </div>
+
+</section>
+
+{% endblock %}
