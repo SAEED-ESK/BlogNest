@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {% if object %}
+        ویرایش نوشته | BlogNest
+    {% else %}
+        ایجاد نوشته | BlogNest
+    {% endif %}
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/blog/post-form.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="post-form-section">
+
+    <div class="post-form-header">
+
+        <span class="form-eyebrow">
+            BlogNest
+        </span>
+
+        <h1>
+            {% if object %}
+                ویرایش نوشته
+            {% else %}
+                ایجاد نوشته جدید
+            {% endif %}
+        </h1>
+
+        <p>
+            {% if object %}
+                اطلاعات نوشته را ویرایش و تغییرات را ذخیره کنید.
+            {% else %}
+                نوشته خود را ایجاد و منتشر کنید.
+            {% endif %}
+        </p>
+
+    </div>
+
+
+    <div class="post-form-card">
+
+        <form method="post" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+
+            <!-- Image -->
+
+            <div class="form-group">
+
+                <label for="{{ form.image.id_for_label }}">
+                    تصویر نوشته
+                </label>
+
+                {{ form.image }}
+
+                {% if form.image.errors %}
+                    <div class="field-errors">
+                        {{ form.image.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <!-- Title -->
+
+            <div class="form-group">
+
+                <label for="{{ form.title.id_for_label }}">
+                    عنوان
+                </label>
+
+                {{ form.title }}
+
+                {% if form.title.errors %}
+                    <div class="field-errors">
+                        {{ form.title.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <!-- Content -->
+
+            <div class="form-group">
+
+                <label for="{{ form.content.id_for_label }}">
+                    محتوا
+                </label>
+
+                {{ form.content }}
+
+                {% if form.content.errors %}
+                    <div class="field-errors">
+                        {{ form.content.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <!-- Category + Status -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="{{ form.category.id_for_label }}">
+                        دسته‌بندی
+                    </label>
+
+                    {{ form.category }}
+
+                    {% if form.category.errors %}
+                        <div class="field-errors">
+                            {{ form.category.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.status.id_for_label }}">
+                        وضعیت انتشار
+                    </label>
+
+                    {{ form.status }}
+
+                    {% if form.status.errors %}
+                        <div class="field-errors">
+                            {{ form.status.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- Published Date -->
+
+            <div class="form-group">
+
+                <label for="{{ form.published_date.id_for_label }}">
+                    تاریخ انتشار
+                </label>
+
+                {{ form.published_date }}
+
+                {% if form.published_date.errors %}
+                    <div class="field-errors">
+                        {{ form.published_date.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <!-- Actions -->
+
+            <div class="form-actions">
+
+                <button type="submit" class="submit-btn">
+
+                    {% if object %}
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        ذخیره تغییرات
+                    {% else %}
+                        <i class="fa-solid fa-paper-plane"></i>
+                        ایجاد نوشته
+                    {% endif %}
+
+                </button>
+
+
+                {% if object %}
+
+                    <a
+                        href="{% url 'blog:blog-detail' object.id %}"
+                        class="cancel-btn"
+                    >
+                        انصراف
+                    </a>
+
+                {% else %}
+
+                    <a
+                        href="{% url 'blog:blog-list' %}"
+                        class="cancel-btn"
+                    >
+                        انصراف
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

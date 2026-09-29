@@ -62,7 +62,7 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
     Create a post for authenticated user.
     """
     model = Post
-    template_name = "blog/post_create.html"
+    template_name = "blog/post_form.html"
     form_class = PostForm
     success_url = "/blog/post/"
 
@@ -80,7 +80,7 @@ class BlogEditView(LoginRequiredMixin, UpdateView):
     After success editing redirect to list of blog posts
     """
     model = Post
-    template_name = "blog/post_create.html"
+    template_name = "blog/post_form.html"
     form_class = PostForm
 
     def get_queryset(self):
