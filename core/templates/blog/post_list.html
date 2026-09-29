@@ -1,51 +1,210 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form method="get">
-    <select name="category" onchange="this.form.submit()">
-        <option value="">All Categories</option>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    نوشته‌ها | BlogNest
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/blog/blog-list.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="posts-section">
+
+    <!-- Header -->
+    <div class="posts-header">
+
+        <div>
+            <span class="posts-eyebrow">
+                BlogNest
+            </span>
+
+            <h1>
+                نوشته‌ها
+            </h1>
+
+            <p>
+                جدیدترین نوشته‌ها و مطالب منتشرشده
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- Categories -->
+    <div class="categories">
+
+        <a
+            href="{% url 'blog:blog-list' %}"
+            class="category-btn {% if not current_category %}active{% endif %}"
+        >
+            همه
+        </a>
 
         {% for category in categories %}
-            <option value="{{ category.name }}"
-                {% if current_category.name == category.name %}
-                    selected
-                {% endif %}
+
+            <a
+                href="?category={{ category.id }}"
+                class="category-btn {% if current_category == category.id|stringformat:'s' %}active{% endif %}"
             >
                 {{ category.name }}
-            </option>
+            </a>
+
         {% endfor %}
 
-    </select>
-    </form>
-    {% for post in object_list %}
-        <div>
-            <h2><a href="{% url 'blog:blog-detail' pk=post.id %}">{{post}}</a></h2>
-            <p>{{post.content}}</p>
-            <p>{{post.author.first_name}} {{post.author.last_name}}</p>
-            <p>{{post.published_date}}</p>
-        </div>
-    {% endfor %}
-    <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
     </div>
-</body>
-</html>
+
+
+    <!-- Posts -->
+    {% if object_list %}
+
+        <div class="posts-grid">
+
+            {% for post in object_list %}
+
+                <article class="post-card">
+
+                    {% if post.image %}
+                        <a
+                            href="{% url 'blog:blog-detail' post.pk %}"
+                            class="post-image"
+                        >
+                            <img
+                                src="{{ post.image.url }}"
+                                alt="{{ post.title }}"
+                            >
+                        </a>
+                    {% endif %}
+
+
+                    <div class="post-card-content">
+
+                        <div class="post-title-row">
+
+                            <h2>
+                                <a href="{% url 'blog:blog-detail' post.pk %}">
+                                    {{ post.title }}
+                                </a>
+                            </h2>
+
+                            {% if post.category %}
+                                <span class="post-category">
+                                    {{ post.category.name }}
+                                </span>
+                            {% endif %}
+
+                        </div>
+
+
+                        <p class="post-excerpt">
+                            {{ post.content|striptags|truncatewords:25 }}
+                        </p>
+
+
+                        <div class="post-meta">
+
+                            <span>
+                                <i class="fa-regular fa-user"></i>
+                                {{ post.author.display_name }}
+                            </span>
+
+                            <span>
+                                <i class="fa-regular fa-calendar"></i>
+                                {{ post.created_date|date:"Y/m/d" }}
+                            </span>
+
+                        </div>
+
+
+                        <a
+                            href="{% url 'blog:blog-detail' post.pk %}"
+                            class="read-more"
+                        >
+                            ادامه مطلب
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+
+            <nav class="pagination">
+
+                {% if page_obj.has_previous %}
+                    <a
+                        href="?page={{ page_obj.previous_page_number }}{% if current_category %}&category={{ current_category }}{% endif %}"
+                        class="page-btn"
+                    >
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                {% endif %}
+
+
+                {% for num in page_obj.paginator.page_range %}
+
+                    {% if page_obj.number == num %}
+
+                        <span class="page-btn active">
+                            {{ num }}
+                        </span>
+
+                    {% else %}
+
+                        <a
+                            href="?page={{ num }}{% if current_category %}&category={{ current_category }}{% endif %}"
+                            class="page-btn"
+                        >
+                            {{ num }}
+                        </a>
+
+                    {% endif %}
+
+                {% endfor %}
+
+
+                {% if page_obj.has_next %}
+                    <a
+                        href="?page={{ page_obj.next_page_number }}{% if current_category %}&category={{ current_category }}{% endif %}"
+                        class="page-btn"
+                    >
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </a>
+                {% endif %}
+
+            </nav>
+
+        {% endif %}
+
+
+    {% else %}
+
+        <div class="empty-posts">
+
+            <i class="fa-regular fa-file-lines"></i>
+
+            <h2>
+                نوشته‌ای پیدا نشد
+            </h2>
+
+            <p>
+                در این دسته‌بندی هنوز نوشته‌ای منتشر نشده است.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
