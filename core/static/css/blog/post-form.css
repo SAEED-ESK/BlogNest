@@ -1,0 +1,263 @@
+.post-form-section {
+    width: min(850px, 100%);
+    margin: 0 auto;
+    padding: 65px 20px;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.post-form-header {
+    margin-bottom: 30px;
+}
+
+.form-eyebrow {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #8b4b2d;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.post-form-header h1 {
+    margin: 0 0 8px;
+    color: #2d2520;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.post-form-header p {
+    margin: 0;
+    color: #888;
+    font-size: 13px;
+}
+
+
+/* =========================
+   Form Card
+========================= */
+
+.post-form-card {
+    padding: 35px;
+    background: #fff;
+    border: 1px solid #eee7e3;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .04);
+}
+
+
+/* =========================
+   Form
+========================= */
+
+.post-form-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    color: #4b423c;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 13px;
+    border: 1px solid #e5ddd8;
+    border-radius: 8px;
+    outline: none;
+    background: #fff;
+    color: #3b3028;
+    font-family: inherit;
+    font-size: 13px;
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #8b4b2d;
+    box-shadow: 0 0 0 3px rgba(139, 75, 45, .08);
+}
+
+.form-group textarea {
+    min-height: 300px;
+    resize: vertical;
+    line-height: 2;
+}
+
+
+/* =========================
+   File Input
+========================= */
+
+.form-group input[type="file"] {
+    padding: 9px;
+    cursor: pointer;
+}
+
+.form-group input[type="file"]::file-selector-button {
+    margin-left: 10px;
+    padding: 7px 12px;
+    border: none;
+    border-radius: 6px;
+    background: #f4eee9;
+    color: #8b4b2d;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+
+/* =========================
+   Checkbox
+========================= */
+
+.form-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 4px 0 0;
+    accent-color: #8b4b2d;
+    cursor: pointer;
+}
+
+
+/* =========================
+   Row
+========================= */
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+
+/* =========================
+   Errors
+========================= */
+
+.form-errors,
+.field-errors {
+    margin-top: 7px;
+    color: #a14c3e;
+    font-size: 11px;
+}
+
+.form-errors ul,
+.field-errors ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+/* =========================
+   Actions
+========================= */
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+    padding-top: 22px;
+    border-top: 1px solid #f0ebe8;
+}
+
+.submit-btn,
+.cancel-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 17px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.submit-btn {
+    border: none;
+    background: #8b4b2d;
+    color: #fff;
+}
+
+.submit-btn:hover {
+    background: #713a22;
+}
+
+.cancel-btn {
+    border: 1px solid #e5ddd8;
+    background: #fff;
+    color: #665b54;
+}
+
+.cancel-btn:hover {
+    border-color: #8b4b2d;
+    color: #8b4b2d;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 650px) {
+
+    .post-form-section {
+        padding: 45px 15px;
+    }
+
+    .post-form-header h1 {
+        font-size: 27px;
+    }
+
+    .post-form-card {
+        padding: 24px 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .post-form-card {
+        padding: 20px 16px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .submit-btn,
+    .cancel-btn {
+        width: 100%;
+    }
+
+}
