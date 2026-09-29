@@ -1,5 +1,72 @@
-<form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    {{ form }}
-    <input type="submit" value="Confirm">
-</form>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    حذف نوشته | BlogNest
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/blog/post-delete.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="delete-section">
+
+    <div class="delete-card">
+
+        <div class="delete-icon">
+            <i class="fa-regular fa-trash-can"></i>
+        </div>
+
+        <span class="delete-eyebrow">
+            BlogNest
+        </span>
+
+        <h1>
+            حذف نوشته
+        </h1>
+
+        <p class="delete-message">
+            آیا مطمئن هستید که می‌خواهید این نوشته را حذف کنید؟
+        </p>
+
+        <div class="post-title-preview">
+            {{ object.title }}
+        </div>
+
+        <p class="delete-warning">
+            این عملیات قابل بازگشت نیست.
+        </p>
+
+
+        <form method="post" class="delete-form">
+
+            {% csrf_token %}
+
+            {{ form }}
+
+            <div class="delete-actions">
+
+                <button type="submit" class="delete-btn">
+                    <i class="fa-regular fa-trash-can"></i>
+                    حذف نوشته
+                </button>
+
+                <a
+                    href="{% url 'blog:blog-detail' object.id %}"
+                    class="cancel-btn"
+                >
+                    انصراف
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}
