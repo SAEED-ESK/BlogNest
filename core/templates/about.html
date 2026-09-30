@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    درباره ما | BlogNest
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="about-section">
+
+    <div class="about-hero">
+
+        <span class="about-eyebrow">
+            BlogNest
+        </span>
+
+        <h1>
+            جایی برای خواندن، نوشتن و به اشتراک گذاشتن
+        </h1>
+
+        <p>
+            BlogNest یک پلتفرم ساده برای انتشار و دنبال کردن نوشته‌هاست؛
+            جایی که نویسندگان می‌توانند ایده‌ها و تجربه‌های خود را با دیگران
+            به اشتراک بگذارند.
+        </p>
+
+    </div>
+
+
+    <div class="about-content">
+
+        <div class="about-card">
+
+            <div class="about-icon">
+                <i class="fa-solid fa-pen-nib"></i>
+            </div>
+
+            <h2>
+                برای نویسندگان
+            </h2>
+
+            <p>
+                نوشته‌های خود را ایجاد کنید، دسته‌بندی کنید و با دیگران
+                به اشتراک بگذارید.
+            </p>
+
+        </div>
+
+
+        <div class="about-card">
+
+            <div class="about-icon">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+
+            <h2>
+                برای خوانندگان
+            </h2>
+
+            <p>
+                نوشته‌های مختلف را دنبال کنید، مطالب مورد علاقه خود را
+                بخوانید و دیدگاه خود را در بخش نظرات به اشتراک بگذارید.
+            </p>
+
+        </div>
+
+
+        <div class="about-card">
+
+            <div class="about-icon">
+                <i class="fa-solid fa-comments"></i>
+            </div>
+
+            <h2>
+                گفتگو و تعامل
+            </h2>
+
+            <p>
+                BlogNest فقط محلی برای انتشار محتوا نیست؛
+                نظرات و گفتگوها بخشی از تجربه آن هستند.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="about-story">
+
+        <div>
+
+            <span class="about-eyebrow">
+                درباره BlogNest
+            </span>
+
+            <h2>
+                ساده، کاربردی و ساخته‌شده برای محتوا
+            </h2>
+
+        </div>
+
+        <p>
+            BlogNest با هدف ایجاد یک فضای ساده و مرتب برای انتشار محتوا
+            ساخته شده است. تمرکز پروژه روی تجربه کاربری، مدیریت نوشته‌ها،
+            دسته‌بندی محتوا و تعامل میان نویسندگان و خوانندگان است.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}
