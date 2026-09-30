@@ -1,0 +1,175 @@
+.delete-section {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+
+/* =========================
+   Card
+========================= */
+
+.delete-card {
+    width: min(500px, 100%);
+    padding: 45px 40px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #eee7e3;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .04);
+}
+
+
+/* =========================
+   Icon
+========================= */
+
+.delete-icon {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: #fff3f0;
+    color: #a14c3e;
+    font-size: 22px;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.delete-eyebrow {
+    display: block;
+    margin-bottom: 6px;
+    color: #8b4b2d;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.delete-card h1 {
+    margin: 0 0 15px;
+    color: #2d2520;
+    font-size: 27px;
+    font-weight: 800;
+}
+
+.delete-message {
+    margin: 0;
+    color: #665e58;
+    font-size: 13px;
+    line-height: 2;
+}
+
+
+/* =========================
+   Post Preview
+========================= */
+
+.post-title-preview {
+    margin: 22px 0 12px;
+    padding: 13px 16px;
+    border: 1px solid #eee7e3;
+    border-radius: 9px;
+    background: #faf7f5;
+    color: #3b3028;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.8;
+}
+
+.delete-warning {
+    margin: 0;
+    color: #a14c3e;
+    font-size: 11px;
+}
+
+
+/* =========================
+   Actions
+========================= */
+
+.delete-form {
+    margin-top: 25px;
+}
+
+.delete-form > input,
+.delete-form > select,
+.delete-form > textarea {
+    display: none;
+}
+
+.delete-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.delete-btn,
+.cancel-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-width: 115px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.delete-btn {
+    border: none;
+    background: #a14c3e;
+    color: #fff;
+}
+
+.delete-btn:hover {
+    background: #863c31;
+}
+
+.cancel-btn {
+    border: 1px solid #e5ddd8;
+    background: #fff;
+    color: #665b54;
+}
+
+.cancel-btn:hover {
+    border-color: #8b4b2d;
+    color: #8b4b2d;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 500px) {
+
+    .delete-section {
+        padding: 35px 15px;
+    }
+
+    .delete-card {
+        padding: 35px 22px;
+    }
+
+    .delete-actions {
+        flex-direction: column;
+    }
+
+    .delete-btn,
+    .cancel-btn {
+        width: 100%;
+    }
+
+}
