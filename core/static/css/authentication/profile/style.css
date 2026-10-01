@@ -289,3 +289,35 @@
         font-size: 19px;
     }
 }
+.profile-logout-form {
+    margin-top: 10px;
+}
+
+.profile-logout-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 10px 14px;
+
+    border: 1px solid #eaded8;
+    border-radius: 8px;
+
+    background: #fff;
+    color: #a14c3e;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.profile-logout-btn:hover {
+    background: #fff3f0;
+    border-color: #d9aaa2;
+    color: #863c31;
+}

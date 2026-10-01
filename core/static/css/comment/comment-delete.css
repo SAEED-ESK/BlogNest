@@ -1,0 +1,182 @@
+.comment-delete-section {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+
+/* =========================
+   Card
+========================= */
+
+.comment-delete-card {
+    width: min(500px, 100%);
+    padding: 45px 40px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #eee7e3;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .04);
+}
+
+
+/* =========================
+   Icon
+========================= */
+
+.comment-delete-icon {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: #fff3f0;
+    color: #a14c3e;
+    font-size: 22px;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.comment-delete-eyebrow {
+    display: block;
+    margin-bottom: 6px;
+    color: #8b4b2d;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.comment-delete-card h1 {
+    margin: 0 0 15px;
+    color: #2d2520;
+    font-size: 27px;
+    font-weight: 800;
+}
+
+.comment-delete-message {
+    margin: 0;
+    color: #665e58;
+    font-size: 13px;
+    line-height: 2;
+}
+
+
+/* =========================
+   Comment Preview
+========================= */
+
+.comment-preview {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 22px 0 12px;
+    padding: 15px;
+    border: 1px solid #eee7e3;
+    border-radius: 9px;
+    background: #faf7f5;
+    text-align: right;
+}
+
+.comment-preview > i {
+    margin-top: 4px;
+    color: #8b4b2d;
+    font-size: 14px;
+}
+
+.comment-preview p {
+    margin: 0;
+    color: #3b3028;
+    font-size: 12px;
+    line-height: 2;
+}
+
+.comment-delete-warning {
+    margin: 0;
+    color: #a14c3e;
+    font-size: 11px;
+}
+
+
+/* =========================
+   Actions
+========================= */
+
+.comment-delete-form {
+    margin-top: 25px;
+}
+
+.comment-delete-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.comment-delete-btn,
+.comment-cancel-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-width: 115px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.comment-delete-btn {
+    border: none;
+    background: #a14c3e;
+    color: #fff;
+}
+
+.comment-delete-btn:hover {
+    background: #863c31;
+}
+
+.comment-cancel-btn {
+    border: 1px solid #e5ddd8;
+    background: #fff;
+    color: #665b54;
+}
+
+.comment-cancel-btn:hover {
+    border-color: #8b4b2d;
+    color: #8b4b2d;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 500px) {
+
+    .comment-delete-section {
+        padding: 35px 15px;
+    }
+
+    .comment-delete-card {
+        padding: 35px 22px;
+    }
+
+    .comment-delete-actions {
+        flex-direction: column;
+    }
+
+    .comment-delete-btn,
+    .comment-cancel-btn {
+        width: 100%;
+    }
+
+}
