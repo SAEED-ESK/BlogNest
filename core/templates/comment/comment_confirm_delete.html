@@ -1,16 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form method="post">
-        {% csrf_token %}
-        <p>Are you sure you want to delete "{{ object.body }}"?</p>
-        {{ form }}
-        <input type="submit" value="Confirm">
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    حذف نظر | BlogNest
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/comment/comment-delete.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="comment-delete-section">
+
+    <div class="comment-delete-card">
+
+        <div class="comment-delete-icon">
+            <i class="fa-regular fa-trash-can"></i>
+        </div>
+
+        <span class="comment-delete-eyebrow">
+            BlogNest
+        </span>
+
+        <h1>
+            حذف نظر
+        </h1>
+
+        <p class="comment-delete-message">
+            آیا مطمئن هستید که می‌خواهید این نظر را حذف کنید؟
+        </p>
+
+        <div class="comment-preview">
+            <i class="fa-regular fa-comment"></i>
+
+            <p>
+                {{ object.body }}
+            </p>
+        </div>
+
+        <p class="comment-delete-warning">
+            این عملیات قابل بازگشت نیست.
+        </p>
+
+
+        <form method="post" class="comment-delete-form">
+
+            {% csrf_token %}
+
+            {{ form }}
+
+            <div class="comment-delete-actions">
+
+                <button type="submit" class="comment-delete-btn">
+                    <i class="fa-regular fa-trash-can"></i>
+                    حذف نظر
+                </button>
+
+                <a
+                    href="{% url 'blog:blog-detail' object.post.id %}"
+                    class="comment-cancel-btn"
+                >
+                    انصراف
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

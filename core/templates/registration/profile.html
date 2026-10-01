@@ -50,6 +50,16 @@
                     <i class="fa-solid fa-pen"></i>
                     ویرایش پروفایل
                 </a>
+                <form method="post" action="{% url 'accounts:logout' %}" class="profile-logout-form">
+
+                    {% csrf_token %}
+
+                    <button type="submit" class="profile-logout-btn">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        خروج از حساب
+                    </button>
+
+                </form>
 
             </div>
 
@@ -74,13 +84,25 @@
 
                             {% if post.image %}
                                 <div class="post-image">
-                                    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                                    <a
+                                        href="{% url 'blog:blog-detail' post.pk %}"
+                                        class="post-image"
+                                    >
+                                        <img
+                                            src="{{ post.image_url }}"
+                                            alt="{{ post.title }}"
+                                        >
+                                    </a>
                                 </div>
                             {% endif %}
 
                             <div class="post-content">
 
-                                <h3>{{ post.title }}</h3>
+                                <h3>
+                                    <a href="{% url 'blog:blog-detail' post.pk %}">
+                                        {{ post.title }}
+                                    </a>
+                                </h3>
 
                                 {% if post.category %}
                                     <span class="post-category">

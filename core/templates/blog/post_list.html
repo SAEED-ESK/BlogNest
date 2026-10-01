@@ -67,17 +67,15 @@
 
                 <article class="post-card">
 
-                    {% if post.image %}
-                        <a
-                            href="{% url 'blog:blog-detail' post.pk %}"
-                            class="post-image"
+                    <a
+                        href="{% url 'blog:blog-detail' post.pk %}"
+                        class="post-image"
+                    >
+                        <img
+                            src="{{ post.image_url }}"
+                            alt="{{ post.title }}"
                         >
-                            <img
-                                src="{{ post.image.url }}"
-                                alt="{{ post.title }}"
-                            >
-                        </a>
-                    {% endif %}
+                    </a>
 
 
                     <div class="post-card-content">

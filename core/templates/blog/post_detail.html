@@ -51,14 +51,14 @@
 
 
         <!-- Post Image -->
-        {% if object.image %}
-            <div class="post-detail-image">
-                <img
-                    src="{{ object.image.url }}"
-                    alt="{{ object.title }}"
-                >
-            </div>
-        {% endif %}
+        
+        <div class="post-detail-image">
+            <img
+                src="{{ object.image_url }}"
+                alt="{{ object.title }}"
+            >
+        </div>
+        
 
 
         <!-- Post Content -->
