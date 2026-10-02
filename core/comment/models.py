@@ -24,4 +24,4 @@ class Comment(models.Model):
         """
         Show comment body and author name.
         """
-        return "Comment {} by {}".format(self.body, self.name)
+        return "Comment {} by {}".format(self.body, self.author)
