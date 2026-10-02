@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.cache import cache_page
@@ -43,6 +43,10 @@ def profile(request):
             "posts": posts,
         },
     )
+
+def logout_view(request):
+    logout(request)
+    return redirect("home")
 
 def send_email(request):
     """
